@@ -1,30 +1,39 @@
 pipeline:
   name: p1_remote
   identifier: p1_remote
-  projectIdentifier: proj1
+  projectIdentifier: vivek
   orgIdentifier: default
   tags: {}
   stages:
     - stage:
         name: s1
         identifier: s1
-        description: other_branch_commit
-        type: Custom
+        description: ""
+        type: Approval
         spec:
           execution:
             steps:
               - step:
-                  type: ShellScript
-                  name: ShellScript_1
-                  identifier: ShellScript_1
+                  name: ap1
+                  identifier: ap1
+                  type: HarnessApproval
+                  timeout: 1d
                   spec:
-                    shell: Bash
-                    onDelegate: true
-                    source:
-                      type: Inline
-                      spec:
-                        script: exit 0
-                    environmentVariables: []
-                    outputVariables: []
-                  timeout: 10m
+                    approvalMessage: |-
+                      Please review the following information
+                      and approve the pipeline progression
+                    includePipelineExecutionHistory: true
+                    approvers:
+                      minimumCount: 1
+                      disallowPipelineExecutor: false
+                      userGroups:
+                        - account._account_all_users
+                    isAutoRejectEnabled: false
+                    approverInputs: []
         tags: {}
+  variables:
+    - name: var1
+      type: String
+      description: ""
+      required: false
+      value: "123_321"
