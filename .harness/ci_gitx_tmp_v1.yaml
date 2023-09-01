@@ -1,0 +1,38 @@
+template:
+  name: ci_gitx_tmp
+  identifier: ci_gitx_tmp
+  versionLabel: v1
+  type: Pipeline
+  projectIdentifier: naidusanity
+  orgIdentifier: default
+  tags: {}
+  spec:
+    stages:
+      - stage:
+          name: test5
+          identifier: test5
+          type: CI
+          spec:
+            cloneCodebase: false
+            platform:
+              os: Linux
+              arch: Amd64
+            runtime:
+              type: Cloud
+              spec: {}
+            execution:
+              steps:
+                - step:
+                    type: Run
+                    name: Run_1
+                    identifier: Run_1
+                    spec:
+                      shell: Sh
+                      command: pwd
+                    description: <+input>
+          variables:
+            - name: test_var
+              type: String
+              description: ""
+              required: false
+              value: "20"
